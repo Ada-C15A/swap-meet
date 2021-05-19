@@ -7,10 +7,10 @@ class Vendor:
         return item
 
     def remove(self, item):
-        if item in self.inventory:
-            self.inventory.remove(item)
-        else:
+        if item not in self.inventory:
             return False
+
+        self.inventory.remove(item)
         return item
 
     def get_by_category(self, category):
@@ -21,22 +21,29 @@ class Vendor:
         return items_in_category
 
     def swap_items(self, vendor, item_to_give, item_to_receive):
-        if item_to_give in self.inventory and item_to_receive in vendor.inventory:
-            self.inventory.remove(item_to_give)
-            self.inventory.append(item_to_receive)
-            vendor.inventory.remove(item_to_receive)
-            vendor.inventory.append(item_to_give)
-            return True
-        else:
+        if (
+            not item_to_give in self.inventory
+            or not item_to_receive in vendor.inventory
+        ):
             return False
+
+        self.inventory.remove(item_to_give)
+        self.inventory.append(item_to_receive)
+        vendor.inventory.remove(item_to_receive)
+        vendor.inventory.append(item_to_give)
+        return True
 
     def swap_first_item(self, vendor):
         if not self.inventory or not vendor.inventory:
             return False
-        [self.inventory[0], vendor.inventory[0]] = [
-            vendor.inventory[0],
-            self.inventory[0],
-        ]
+
+        self.swap_items(vendor, self.inventory[0], vendor.inventory[0])
+        # other option not using helper method --
+        # [self.inventory[0], vendor.inventory[0]] = [
+        #     vendor.inventory[0],
+        #     self.inventory[0],
+        # ]
+
         return True
 
     def get_best_by_category(self, item_category):
