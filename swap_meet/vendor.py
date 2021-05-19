@@ -57,3 +57,26 @@ class Vendor:
             return False
         else:
             return self.swap_items(other, my_item, their_item)
+        
+    def get_newest_by_category(self, category):
+        category_matches = [(item, item.age) for item in self.inventory if item.category == category]
+        if not category_matches:
+            return None
+        else:
+            # Using itemgetter: This returns a callable to be used on an iterable object, and returns 
+            # the specified value from the iterable.             
+            # Also note that the 'key' parameter of min allows us to specify a function whose return values 
+            # will be used for the comparison
+            newest = min(category_matches, key = itemgetter(1))[0]
+            return newest 
+
+    def swap_newest_by_category(self, other, my_priority, their_priority):
+        my_item = self.get_newest_by_category(their_priority) 
+        their_item = other.get_newest_by_category(my_priority)
+        
+        if not my_item or not their_item:
+            return False
+        else:
+            return self.swap_items(other, my_item, their_item)
+    
+ 
