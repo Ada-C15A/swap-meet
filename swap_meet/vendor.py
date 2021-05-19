@@ -44,3 +44,20 @@ class Vendor:
             self.add(thier_removed_item)
             other_vendor.add(my_removed_item)
             return True
+       
+    def get_best_by_category(self,item_category):
+        matched_category_list = self.get_by_category(item_category)
+
+        if len(matched_category_list) > 1:
+            best_item = matched_category_list[0]
+            for item in matched_category_list:
+                if item.condition > best_item.condition:
+                    best_item = item
+            return best_item
+        elif len(matched_category_list) == 0:
+            return None
+
+    def swap_best_by_category(self, other, my_priority, their_priority):
+        my_item = other.get_best_by_category(my_priority)
+        their_item = self.get_best_by_category(their_priority)
+        return self.swap_items(other, their_item, my_item)
