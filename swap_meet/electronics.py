@@ -7,3 +7,6 @@ class Electronics(Item):
 
     def __str__(self):
         return super().__str__("A gadget full of buttons and secrets.")
+
+    def condition_description(self):
+        return super().condition_description()
