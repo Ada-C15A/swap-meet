@@ -70,13 +70,23 @@ class Vendor:
     def swap_by_newest(self, vendor):
         self_newest = self.get_newest_item(self.inventory)
         vendor_newest = self.get_newest_item(vendor.inventory)
+        if not self_newest or not vendor_newest:
+            return None
         return self.swap_items(vendor, self_newest, vendor_newest)
 
     @staticmethod
     def get_newest_item(inventory):
-        newest_item = inventory[0]
+        if not inventory:
+            return None
+
+        newest_item = None
+
         for individual_item in inventory:
-            if individual_item.age < newest_item.age:
-                newest_item = individual_item
+            if not newest_item:
+                if individual_item.age:
+                    newest_item = individual_item
+            elif individual_item.age:
+                if individual_item.age < newest_item.age:
+                    newest_item = individual_item
 
         return newest_item
