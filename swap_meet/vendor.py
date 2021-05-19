@@ -63,16 +63,17 @@ class Vendor:
         if len(items) > 0:
             newest = None
             for item in items:
-                if not newest or item['age'] < newest['age']:
+                if not newest or item.age < newest.age:
                     newest = item
             return newest
-        else: return False
+        else: return None
 
-    def swap_newest_by_category(self, other, category=None):
+    def swap_newest_by_category(self, other, my_priority=None, their_priority=None):
         if len(self.inventory) > 0 and len(other.inventory) > 0:
-            my_newest = self.get_newest_by_category(category)
-            their_newest = other.get_newest_by_category(category)
+            my_newest = self.get_newest_by_category(their_priority)
+            their_newest = other.get_newest_by_category(my_priority)
             if my_newest and their_newest:
                 self.swap_items(other, my_newest, their_newest)
+                return True
             else: return False
         else: return False
