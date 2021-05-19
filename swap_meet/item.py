@@ -8,3 +8,5 @@ class Item:
     def __str__(self):
         return 'Hello World!'
 
+    def __repr__(self):
+        return f"{self.category}"
