@@ -26,3 +26,14 @@ class Vendor:
             vendor.inventory.remove(their_item)
             vendor.inventory.append(my_item)
             return True
+    
+    def swap_first_item(self, vendor):
+        if not self.inventory or not vendor.inventory:
+            return False
+        else:
+            my_first = self.inventory.pop(0)
+            their_first = vendor.inventory.pop(0)
+            self.inventory.append(their_first)
+            vendor.inventory.append(my_first)
+            return True
+        
