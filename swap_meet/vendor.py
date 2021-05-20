@@ -51,9 +51,9 @@ class Vendor:
                 best = item
         return best
 
-        # ****Came up with this while refactoring. Which one do you think is more efficient or easier to read?
+        # ****Other option, not sure which one is best
         # list_items = self.get_by_category(category)
- 
+
         # if len(list_items) > 0:
         #     best = list_items[0]
         #     for item in list_items:
@@ -61,10 +61,31 @@ class Vendor:
         #             best = item
         #     return best
         # return None
+
     def swap_best_by_category(self, other, their_priority, my_priority):
         their_item = self.get_best_by_category(their_priority)
         my_item = other.get_best_by_category(my_priority)
 
         if self.swap_items(other, their_item, my_item):
             return True
+        return False
+
+
+########################SWAP BY NEWEST########################
+    def find_newest_item(self):
+        newest = None
+        if len(self.inventory) > 0:
+            for item in self.inventory:
+                if newest == None:
+                    newest = item
+                elif item.age > newest.age:
+                    newest = item
+        return newest
+
+    def swap_by_newest(self, vendor):
+        my_newest = self.find_newest_item()
+        vendors_newest = vendor.find_newest_item()
+
+        if my_newest and vendors_newest:
+            return self.swap_items(vendor, my_newest, vendors_newest)
         return False
