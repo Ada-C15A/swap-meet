@@ -40,4 +40,3 @@ class Vendor:
         else:
             return False
 
-    
