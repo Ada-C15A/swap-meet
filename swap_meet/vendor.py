@@ -45,3 +45,21 @@ class Vendor:
         else:
             return False
             
+    def get_best_by_category(self, category):
+        highest = 0.0
+        best = None
+        i = 0
+        print(f"count = {len(self.inventory)}")
+        for item in self.inventory:
+            if item.condition > highest and item.category == str(category):
+                print(f"{i} {item.category} and {item.condition}") 
+                best = item
+                highest = item.condition
+                i += 1
+            else:
+                    print(f"{i} Not it")
+                    i += 1
+                    
+                    
+        print(best)
+        return best

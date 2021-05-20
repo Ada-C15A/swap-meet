@@ -5,7 +5,7 @@ class Clothing(Item):
         if condition == None:
             super().__init__(category="Clothing")
         else:
-            super().__init__( condition=condition, category='Electronics')
+            super().__init__( condition=condition, category='Clothing')
         
     
     def __str__(self):
