@@ -48,18 +48,32 @@ class Vendor:
     def get_best_by_category(self, category):
         highest = 0.0
         best = None
-        i = 0
-        print(f"count = {len(self.inventory)}")
         for item in self.inventory:
             if item.condition > highest and item.category == str(category):
-                print(f"{i} {item.category} and {item.condition}") 
                 best = item
                 highest = item.condition
-                i += 1
-            else:
-                    print(f"{i} Not it")
-                    i += 1
-                    
-                    
-        print(best)
         return best
+
+    def swap_best_by_category(self, other, my_priority, their_priority):
+        if not self.inventory or not other.inventory:
+            return False
+        if not my_priority or not their_priority:
+            return False
+        
+        my_p = other.get_best_by_category(my_priority)
+        their_p = self.get_best_by_category(their_priority)
+
+        if (my_p in other.inventory )and (their_p in self.inventory):
+            self.swap_items(other, their_p, my_p)
+            return True
+        else:
+            return False
+
+
+        # if my_priority == None or their_priority == None:
+        #     return False
+        # if (their_p in self.inventory) and (my_p in other.inventory):
+        #     self.swap_items(other, their_p, my_p)
+        #     return True
+        # else: 
+        #     return False
