@@ -8,7 +8,7 @@ def test_clothing_has_default_category_and_to_str():
     cloth = Clothing()
     assert cloth.category == "Clothing"
     assert str(cloth) == "The finest clothing you could wear."
-
+    
 
 def test_decor_has_default_category_and_to_str():
     decor = Decor()
@@ -49,5 +49,4 @@ def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type(
     for item in items:
         item.condition = 1
         assert item.condition_description() == one_condition_description
-
     assert one_condition_description != five_condition_description
