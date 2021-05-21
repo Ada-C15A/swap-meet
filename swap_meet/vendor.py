@@ -41,4 +41,29 @@ class Vendor:
            
             return True
         return False
+
+    def get_best_by_category(self,item):
+        heighest=0
+        best_match=""
+        for i in self.inventory:
+            if i.category == item and i.condition > heighest:
+                heighest=i.condition
+                best_match=i
+        if not best_match :
+            return None
+        return best_match
     
+    def swap_best_by_category(self,other,my_priority,their_priority):
+        mine=self.get_best_by_category(their_priority)
+        theirs=other.get_best_by_category(my_priority)
+        return self.swap_items(other,mine,theirs)
+    
+
+
+            
+ 
+
+        
+
+
+
