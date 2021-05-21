@@ -21,9 +21,9 @@ class Item:
                 "Good enough for company",
                 "P-r-i-m-o!"                
          ]
-         return descriptions[self.condition]
+         return descriptions[int(self.condition)]
     
     def age_descriptions(self):
         descriptions = ['0-1 year', '2-5 years', '5-10 years', 'older than 10 years']
-        return descriptions[self.age]
+        return descriptions[int(self.age)]
      

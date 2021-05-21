@@ -33,10 +33,15 @@ class Vendor:
         if not self.inventory or not other.inventory:
             return False
         else:
-            my_first = self.inventory[0]
-            their_first = other.inventory[0]
-            return self.swap_items(other, my_first, their_first)
-
+            # Original way I did it:
+            # my_first = self.inventory[0]
+            # their_first = other.inventory[0]
+            # return self.swap_items(other, my_first, their_first)
+            
+            # Alternative with O(1) time instead of O(n)
+            self.inventory[0], other.inventory[0] = other.inventory[0], self.inventory[0]
+            return True
+        
     def get_best_by_category(self, category):
         category_matches = [(item, item.condition) for item in self.inventory if item.category == category]
         if not category_matches:
