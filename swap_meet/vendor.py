@@ -11,8 +11,7 @@ class Vendor:
         if item in self.inventory:
             self.inventory.remove(item)
             return item
-        else:
-            return False            
+        return False            
 
     def get_by_category(self, category):
         category_items = []
@@ -21,7 +20,7 @@ class Vendor:
                 category_items.append(item)
         return category_items
 
-    def swap_items(self, vendor,  my_item, their_item):
+    def swap_items(self, vendor, my_item, their_item):
         if my_item in self.inventory and \
             their_item in vendor.inventory:
             self.remove(my_item)
@@ -44,13 +43,18 @@ class Vendor:
             if item.category == category:
                 item_options.append(item)
 
-        # get the item with highest condition item
-        # if none then return none else just return the first
         if len(item_options) > 0:
             best_item = item_options[0]
             for item in item_options:
                 if item.condition > best_item.condition:
                     best_item = item
             return best_item
-        else:
-            return None
+        return None
+    
+    def swap_best_by_category(self, other, my_priority, their_priority):
+        my_best = self.get_best_by_category(their_priority)
+        their_best = other.get_best_by_category(my_priority)
+        if my_best and their_best:
+            self.swap_items(other, my_best, their_best)
+            return True
+        return False
