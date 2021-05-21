@@ -14,3 +14,8 @@ class Vendor:
             ]
         return item
 
+    def get_by_category(self, category):
+        category_items = [
+            item for item in self.inventory if item.category == category
+        ]
+        return category_items
