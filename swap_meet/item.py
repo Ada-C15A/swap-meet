@@ -8,5 +8,5 @@ class Item:
     
     def condition_description(self):
         descriptions = ["Trash","Used","Gently Used","Like New","New", "New Tags"]
-        return descriptions[self.condition]
+        return descriptions[round(self.condition)]
         
