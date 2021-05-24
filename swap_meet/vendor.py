@@ -2,8 +2,16 @@ from operator import itemgetter
 
 class Vendor:
     
-    def __init__(self, inventory=[]):
-        self.inventory = inventory
+    def __init__(self, inventory = []):
+        # Make a copy of what's passed in so changes to this instance's 
+        # inventory don't affect other vendor's inventories (or other uses of the list being passed in)
+        self.inventory = list(inventory)
+        
+        # Alternatively could have written default as inventory = none,
+        # and used 
+        # self.inventory = inventory or []
+        # This siloes sparate vendor's inventories, 
+        # but still doesnot protect against an accidental changing of an underlying list 
 
     def add(self, item):
         self.inventory.append(item)

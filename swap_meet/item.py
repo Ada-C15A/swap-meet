@@ -21,8 +21,9 @@ class Item:
                 "Good enough for company",
                 "P-r-i-m-o!"                
          ]
-         return descriptions[int(self.condition)]
-    
+         return descriptions[int(self.condition)]  # int() will truncate a condition that was a float
+         # alternative: return descriptions[math.floor((self.condition))]
+       
     def age_descriptions(self):
         descriptions = ['0-1 year', '2-5 years', '5-10 years', 'older than 10 years']
         return descriptions[int(self.age)]

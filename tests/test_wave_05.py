@@ -31,6 +31,15 @@ def test_items_have_condition_as_float():
     for item in items:
         assert item.condition == pytest.approx(3.5)
 
+def test_condition_descriptions_work_for_floats():
+    items = [Clothing(condition=3.5),
+             Decor(condition=3)]
+    for item in items:
+        assert item.condition_description()
+    
+    
+    
+    
 def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type():
     items = [
         Clothing(condition=5),

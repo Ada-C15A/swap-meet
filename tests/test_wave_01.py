@@ -6,7 +6,14 @@ def test_vendor_has_inventory():
     vendor = Vendor()
     assert len(vendor.inventory) == 0
 
-
+def test_different_vendors_inventories_are_siloed():
+    vendor1 = Vendor()
+    vendor2 = Vendor()
+    vendor1.add("item1")
+    assert vendor1.inventory == ["item1"]
+    assert vendor2.inventory == []
+    
+    
 def test_vendor_takes_optional_inventory():
     inventory = ["a", "b", "c"]
     vendor = Vendor(inventory=inventory)
